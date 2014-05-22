@@ -1,0 +1,84 @@
+= form_tag service_requests_path, :id => "service_request_form", class: "form-horizontal" do
+  .panel.panel-default
+    .list-group
+      .list-group-item
+        %h3 What can we do for you?
+        .form-group
+          .col-sm-12
+            = text_area_tag :job_name, params[:job_name], :class => "validate[required] form-control", :rows => 3, :placeholder => 'Describe your service request here...'
+
+      .list-group-item
+        %h3 Tell us about yourself
+
+        .form-group
+          = label_tag :contact_first_name, "Name", class: "control-label col-sm-3"
+          .col-sm-9
+            .form-inline
+              = text_field_tag :contact_first_name, params[:contact_first_name], :class => "validate[required] form-control", placeholder: "First name", style: "width: 45%;"
+              = text_field_tag :contact_last_name, params[:contact_last_name], :class => "validate[required] form-control", placeholder: "Last name", style: "width: 53%;"
+        = hidden_field_tag :contact_primary, true
+
+        .form-group
+          = label_tag :customer_email_address, "Email", class: "control-label col-sm-3"
+          .col-sm-8
+            = text_field_tag :customer_email_address, params[:customer_email_address], :class => "validate[required,custom[email]] form-control"
+
+        .form-group
+          = label_tag :customer_phone_number, "Phone", class: "control-label col-sm-3"
+          .col-sm-6
+            = text_field_tag :customer_phone_number, params[:customer_phone_number], class: "form-control"
+
+        .form-group
+          = label_tag :customer_service_address, "Address", class: "control-label col-sm-3"
+          .col-sm-9
+            = text_area_tag :customer_service_address, params[:customer_service_address], :rows => 2, class: "form-control"
+            .form-inline{style: "margin-top: 5px;"}
+              = text_field_tag :customer_service_city, params[:customer_service_city], class: "form-control", placeholder: "City", style: "width: 45%"
+              = text_field_tag :customer_service_state, params[:customer_service_state], class: "form-control", placeholder: "State", style: "width: 17%"
+              = text_field_tag :customer_service_zip_code, params[:customer_service_zip_code], class: "form-control", placeholder: "Zip Code", style: "width: 30%"
+
+        .form-group
+          = label_tag :customer_name, "Company", class: "control-label col-sm-3"
+          .col-sm-9
+            = text_field_tag :customer_name, params[:customer_name], class: "form-control", placeholder: "(optional)"
+
+      .list-group-item
+
+        %h3
+          Site Contact
+          %small (if different from above)
+
+        .form-group
+          = label_tag :site_contact_first_name, "Name", class: "control-label col-sm-3"
+          .col-sm-9
+            .form-inline
+              = text_field_tag :site_contact_first_name, params[:site_contact_first_name], :class => "form-control", placeholder: "First name", style: "width: 45%;"
+              = text_field_tag :site_contact_last_name, params[:site_contact_last_name], :class => "form-control", placeholder: "Last name", style: "width: 53%;"
+
+        .form-group
+          = label_tag :site_contact_email_address, "Email", class: "control-label col-sm-3"
+          .col-sm-8
+            = text_field_tag :site_contact_email_address, params[:site_contact_email_address], class: "form-control"
+
+        .form-group
+          = label_tag :site_contact_phone_number, "Phone", class: "control-label col-sm-3"
+          .col-sm-6
+            = text_field_tag :site_contact_phone_number, params[:site_contact_phone_number], class: "form-control"
+
+      .list-group-item
+
+        %h3 How did you hear about us?
+
+        .form-group
+          = label_tag "customer[customer_source]", "Source", class: "control-label col-sm-3"
+          .col-sm-4
+            = collection_select(:customer, :customer_source, @current_account.customer_sources.all, :id, :name, {}, {:class => 'form-control input-sm'})
+
+
+  = submit_tag 'Submit Request', :class => "btn btn-success btn-block"
+
+
+:javascript
+  $(document).ready(function() {
+
+  });
