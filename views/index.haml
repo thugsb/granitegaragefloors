@@ -1,46 +1,58 @@
-= form_tag service_requests_path, :id => "service_request_form", class: "form-horizontal" do
+%form#service_request_form.form-horizontal{action: '/', method: 'POST'}
   .panel.panel-default
     .list-group
       .list-group-item
         %h3 What can we do for you?
         .form-group
           .col-sm-12
-            = text_area_tag :job_name, params[:job_name], :class => "validate[required] form-control", :rows => 3, :placeholder => 'Describe your service request here...'
+            %textarea.form-control{name: 'job_name', rows: 3, placeholder: 'Describe your service request here...', required: 'required'}
 
       .list-group-item
         %h3 Tell us about yourself
 
         .form-group
-          = label_tag :contact_first_name, "Name", class: "control-label col-sm-3"
+          %label.control-label.col-sm-3{for: 'contact_first_name'} Name
           .col-sm-9
             .form-inline
-              = text_field_tag :contact_first_name, params[:contact_first_name], :class => "validate[required] form-control", placeholder: "First name", style: "width: 45%;"
-              = text_field_tag :contact_last_name, params[:contact_last_name], :class => "validate[required] form-control", placeholder: "Last name", style: "width: 53%;"
-        = hidden_field_tag :contact_primary, true
+              %input.form-control{type: 'text', name: 'contact_first_name', required: 'required', placeholder: 'First Name', style: 'width: 45%'}
+              %input.form-control{type: 'text', name: 'contact_last_name', required: 'required', placeholder: 'Last Name', style: 'width: 53%'}
+        %input{type: 'hidden', name: 'contact_primary', value: 'true'}
 
         .form-group
-          = label_tag :customer_email_address, "Email", class: "control-label col-sm-3"
+          %label.control-label.col-sm-3{for: 'customer_email_address'} Email
           .col-sm-8
-            = text_field_tag :customer_email_address, params[:customer_email_address], :class => "validate[required,custom[email]] form-control"
+            %input.form-control{type: 'text', name: 'customer_email_address', required: 'required', placeholder: ''}
 
         .form-group
-          = label_tag :customer_phone_number, "Phone", class: "control-label col-sm-3"
+          %label.control-label.col-sm-3{for: 'customer_phone_number'} Phone
           .col-sm-6
-            = text_field_tag :customer_phone_number, params[:customer_phone_number], class: "form-control"
+            %input.form-control{type: 'text', name: 'customer_phone_number', placeholder: ''}
 
         .form-group
-          = label_tag :customer_service_address, "Address", class: "control-label col-sm-3"
+          %label.control-label.col-sm-3{for: 'customer_service_address'} Address
           .col-sm-9
-            = text_area_tag :customer_service_address, params[:customer_service_address], :rows => 2, class: "form-control"
+            %textarea.form-control{name: 'customer_service_address', rows: 2, placeholder: ''}
             .form-inline{style: "margin-top: 5px;"}
-              = text_field_tag :customer_service_city, params[:customer_service_city], class: "form-control", placeholder: "City", style: "width: 45%"
-              = text_field_tag :customer_service_state, params[:customer_service_state], class: "form-control", placeholder: "State", style: "width: 17%"
-              = text_field_tag :customer_service_zip_code, params[:customer_service_zip_code], class: "form-control", placeholder: "Zip Code", style: "width: 30%"
+              %input.form-control{type: 'text', name: 'customer_service_city', placeholder: 'City', style: "width: 45%"}
+              %input.form-control{type: 'text', name: 'customer_service_state', placeholder: 'State', style: "width: 17%"}
+              %input.form-control{type: 'text', name: 'customer_service_zip_code', placeholder: 'Zip Code', style: "width: 30%"}
 
         .form-group
-          = label_tag :customer_name, "Company", class: "control-label col-sm-3"
+          %label.control-label.col-sm-3{for: 'customer_name'} Company
           .col-sm-9
-            = text_field_tag :customer_name, params[:customer_name], class: "form-control", placeholder: "(optional)"
+            %input.form-control{type: 'text', name: 'customer_name', placeholder: '(optional)'}
+
+        .form-group
+          %label.control-label.col-sm-3{for: 'customer_name'} Size of Garage
+          .col-sm-9
+            %select.form-control.input-sm{name: 'custom_text1'}
+              %option{value: ''} Please select
+              %option Small
+              %option 1 car
+              %option 2 cars
+              %option 3 cars
+              %option 4 cars
+              %option 5+ cars
 
       .list-group-item
 
@@ -49,33 +61,36 @@
           %small (if different from above)
 
         .form-group
-          = label_tag :site_contact_first_name, "Name", class: "control-label col-sm-3"
+          %label.control-label.col-sm-3{for: 'site_contact_first_name'} Name
           .col-sm-9
             .form-inline
-              = text_field_tag :site_contact_first_name, params[:site_contact_first_name], :class => "form-control", placeholder: "First name", style: "width: 45%;"
-              = text_field_tag :site_contact_last_name, params[:site_contact_last_name], :class => "form-control", placeholder: "Last name", style: "width: 53%;"
+              %input.form-control{type: 'text', name: 'site_contact_first_name', placeholder: 'First Name', style: 'width: 45%'}
+              %input.form-control{type: 'text', name: 'site_contact_last_name', placeholder: 'Last Name', style: 'width: 53%'}
 
         .form-group
-          = label_tag :site_contact_email_address, "Email", class: "control-label col-sm-3"
+          %label.control-label.col-sm-3{for: 'site_contact_email_address'} Email
           .col-sm-8
-            = text_field_tag :site_contact_email_address, params[:site_contact_email_address], class: "form-control"
+            %input.form-control{type: 'text', name: 'site_contact_email_address', placeholder: ''}
 
         .form-group
-          = label_tag :site_contact_phone_number, "Phone", class: "control-label col-sm-3"
+          %label.control-label.col-sm-3{for: 'site_contact_phone_number'} Phone
           .col-sm-6
-            = text_field_tag :site_contact_phone_number, params[:site_contact_phone_number], class: "form-control"
+            %input.form-control{type: 'text', name: 'site_contact_phone_number', placeholder: ''}
 
       .list-group-item
 
         %h3 How did you hear about us?
 
         .form-group
-          = label_tag "customer[customer_source]", "Source", class: "control-label col-sm-3"
+          %label.control-label.col-sm-3{for: 'customer_source'} Name
           .col-sm-4
-            = collection_select(:customer, :customer_source, @current_account.customer_sources.all, :id, :name, {}, {:class => 'form-control input-sm'})
+            %select.form-control.input-sm{name: 'customer_source'}
+              %option{value:"27189"} Google
+              %option{value:"27190"} Other
+              %option{value:"27188"} Referral
+              %option{value:"27187"} Yellow pages
 
-
-  = submit_tag 'Submit Request', :class => "btn btn-success btn-block"
+  %button.btn.btn-success.btn-block.btn-lg Submit Request
 
 
 :javascript
